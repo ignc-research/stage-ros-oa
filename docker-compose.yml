@@ -1,0 +1,22 @@
+version: '3'
+services:
+  ros:
+    image: llalal/stageros-melodic:teb
+    volumes:
+    - .:/root/catkin_stage/src/stage-ros-oa
+    command: tail -f /dev/null
+    environment:
+      - DISPLAY=novnc:0.0
+    networks:
+      - x11stageros
+    container_name: stageros_melodic
+  
+  novnc:  
+    image: theasp/novnc:latest
+    ports:
+      - "8080:8080"
+    networks:
+      - x11stageros
+    container_name: novnc
+networks:
+  x11stageros:
